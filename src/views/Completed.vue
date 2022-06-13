@@ -4,7 +4,7 @@
     <div class="mt-3">
       <div>
         <div class="col-span-6 space-y-4 overflow-y-aut0 px-1" style="height: 500px">
-          <div v-for="task in completeTasks" :key="task.id" class="md:grid-cols-3 lg:grid-cols-4  hover:animate-pulse transition duration-700 ease-in-out p-8 cursor-pointer hover:bg-cyan-400 font-mono font-medium hover:font-bold bg-green-400 shadow-lg rounded-md flex items-center justify-between">
+          <div v-for="task in completeTasks" :task="task" :key="task.id" class="md:grid-cols-3 lg:grid-cols-4  hover:animate-pulse transition duration-700 ease-in-out p-8 cursor-pointer hover:bg-cyan-400 font-mono font-medium hover:font-bold bg-green-400 shadow-lg rounded-md flex items-center justify-between">
             <div>
               
               <div>{{task.title}}</div>
@@ -18,14 +18,14 @@
                <div class="space-x-2">
               <button @click="deleteTask(task)" class="px-2 font-bold text-red-600 text-2xl" title="Delete task"><i class="fa fa-trash"></i>
 </button>
-              <button v-if="!task.completed" @click="markComplete(task.id)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
+              <button v-if="!task.completed" @click="markComplete(task)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
               <button v-else @click="markIncomplete(index)" class="px-2 font-bold text-green-600 text-xl" title="Mark incomplete"><i class="fa fa-undo"></i></button>
               <button class="px-2 font-bold text-amber-600 text-2xl" title="Edit task"><i style="font-size:22px" class="fa">&#xf044;</i></button>
               
             </div>
           </div>
 
-          <div v-if="completeTasks.length === 0" class="animate-bounce my-10 px-6 py-14 bg-amber-400 text-gray-600 shadow-lg rounded-md text-2xl font-bold">
+          <div v-if="completeTasks.length === 0" class="animate-bounce my-10 px-6 py-14 bg-red-400 text-gray-600 shadow-lg rounded-md text-2xl font-bold">
             <marquee behavior="scroll" scrollamount="12" direction="right">NO TASKS FOR TODAY...!!</marquee>
           </div>
 
@@ -67,13 +67,8 @@ const STORAGE_KEY = 'tasks';
     }
   },
     methods: {
-       createTask() {
-        // console.log(`here: ${this.task.id}`)
-        console.log(this.task.id)
-         this.addTask(this.task).then(() => this.task={})
-      },
 
-      ...mapActions(['addTask', 'fetchTasks', 'completeTask']),
+      ...mapActions(['fetchTasks', 'completeTask', 'updateTask']),
       // onSubmit(e) {
       //       e.preventDefault();
       //       this.addTask(this.task);

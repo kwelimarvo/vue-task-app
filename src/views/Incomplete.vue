@@ -18,7 +18,7 @@
                <div class="space-x-2">
               <button @click="deleteTask(index)" class="px-2 font-bold text-red-600 text-2xl" title="Delete task"><i class="fa fa-trash"></i>
 </button>
-              <button v-if="!task.completed" @click="markComplete(task.id)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
+              <button v-if="!task.completed" @click="markComplete(task)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
               <button v-else @click="markIncomplete(index)" class="px-2 font-bold text-green-600 text-xl" title="Mark incomplete"><i class="fa fa-undo"></i></button>
               <button class="px-2 font-bold text-amber-600 text-2xl" title="Edit task"><i style="font-size:22px" class="fa">&#xf044;</i></button>
               
@@ -82,6 +82,7 @@ const STORAGE_KEY = 'tasks';
 
       markComplete(index) {
         this.completeTask[index].completed = true 
+        console.log(index)
         alert('Task Completed')
       },
 

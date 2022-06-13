@@ -86,7 +86,7 @@ const STORAGE_KEY = 'tasks';
           // id: this.id += 1,
           title: '',
           description: '',
-          completed: true,
+          completed: false,
           date_added: new Date(),
           // date_completed: ''
       },
@@ -97,14 +97,23 @@ const STORAGE_KEY = 'tasks';
   methods: {
     createTask() {
     // console.log(`here: ${this.task.id}`)
-      this.addTask(this.task).then(() => this.task={})
+        console.log(`here: ${this.getTasks[this.getTasks.length -1].id}`)
+        this.task.id = parseInt(this.getTasks[this.getTasks.length -1].id)+1
+
+      this.addTask(this.task).then(() => this.task={
+        title: '',
+          description: '',
+          completed: false,
+          date_added: new Date(),
+      })
     },
 
     ...mapActions(['addTask', 'fetchTasks', 'completeTask']),
        
 
-      markComplete(index) {
-        this.completeTask[index].completed = true 
+      markComplete(task) {
+        // this.completeTask[index].completed = true 
+        console.log('Here is the task',task)
         alert('Task Completed')
       },
 
