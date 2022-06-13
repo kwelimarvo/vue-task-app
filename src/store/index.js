@@ -37,7 +37,10 @@ export default createStore({
     deleteTask({commit},task){
       commit('deleteTask',task)
     },
+update({commit}, task){
+  commit('updateTask',task)
 
+},
     // async fetchTasks({ commit }) {
     //   const response = await axios.get('https://tychak.github.io/')
     //   commit('setTasks', response.data)

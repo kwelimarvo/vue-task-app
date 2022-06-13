@@ -4,7 +4,7 @@
     <div class="mt-3">
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-6 space-y-4 overflow-y-aut0 px-1" style="height: 500px">
-          <div v-for="task in getTasks" :key="task.id" :class="{'bg-purple-400': this.$store.state.tasks.completed}" class="transition duration-700 ease-in-out p-8 cursor-pointer hover:bg-sky-300 font-mono font-medium hover:font-bold bg-lime-300 shadow-lg rounded-md flex items-center justify-between">
+          <div v-for="task in getTasks" :key="task.id" class="transition duration-700 ease-in-out p-8 cursor-pointer hover:bg-sky-300 font-mono font-medium hover:font-bold bg-lime-300 shadow-lg rounded-md flex items-center justify-between">
             <div>
               <div>{{task.title}}</div>
               <div class="text-orange-800">{{task.description}}</div>
@@ -17,7 +17,7 @@
                <div class="space-x-2">
               <button @click="deleteTask(task)" class="px-2 font-bold text-red-600 text-2xl" title="Delete task">x
 </button>
-              <button v-if="!task.completed" @click="markComplete(task.id)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
+              <button v-if="!task.completed" @click="toggleComplete(task)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
               <button v-else @click="markIncomplete(index)" class="px-2 font-bold text-green-600 text-xl" title="Mark incomplete"><i class="fa fa-undo"></i></button>
               <button class="px-2 font-bold text-amber-600 text-2xl" title="Edit task"><i style="font-size:22px" class="fa">&#xf044;</i></button>
               
@@ -87,7 +87,7 @@ const STORAGE_KEY = 'tasks';
           title: '',
           description: '',
           completed: false,
-          date_added: new Date(),
+          date_added: new Date().toLocaleDateString(),
           // date_completed: ''
       },
 
@@ -96,25 +96,27 @@ const STORAGE_KEY = 'tasks';
   },
   methods: {
     createTask() {
-    // console.log(`here: ${this.task.id}`)
-        console.log(`here: ${this.getTasks[this.getTasks.length -1].id}`)
+        // console.log(`here: ${this.getTasks[this.getTasks.length -1].id}`)
         this.task.id = parseInt(this.getTasks[this.getTasks.length -1].id)+1
 
       this.addTask(this.task).then(() => this.task={
         title: '',
           description: '',
           completed: false,
-          date_added: new Date(),
+          date_added: new Date().toLocaleDateString(),
       })
     },
 
-    ...mapActions(['addTask', 'fetchTasks', 'completeTask']),
+    ...mapActions(['addTask', 'fetchTasks', 'completeTask', 'toggleDone','update']),
        
 
-      markComplete(task) {
-        // this.completeTask[index].completed = true 
-        console.log('Here is the task',task)
+      toggleComplete(task) {
+         task.completed=true;
+        console.log('Here is the task', task)
+
+
         alert('Task Completed')
+
       },
 
       markIncomplete(index) {
