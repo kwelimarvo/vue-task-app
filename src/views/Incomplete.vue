@@ -106,7 +106,7 @@ const STORAGE_KEY = 'tasks';
     },
 
     created() {
-    // this.fetchTasks()
+    this.fetchTasks()
 },
   }
 </script>

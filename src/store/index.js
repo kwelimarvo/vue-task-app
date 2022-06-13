@@ -57,6 +57,10 @@ export default createStore({
     getTasks: state  => state.tasks,
     incompleteTasks: state => state.tasks.filter((element) => {  
     return !element.completed;
-   })
+   }),
+   completeTasks: state => state.tasks.filter((element) => {  
+    return element.completed;
+   }),
+
   },
 })
