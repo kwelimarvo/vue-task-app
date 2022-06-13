@@ -4,7 +4,7 @@
     <div class="mt-3">
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-6 space-y-4 overflow-y-aut0 px-1" style="height: 500px">
-          <div v-for="task in getTasks" :key="task.id" class="transition duration-700 ease-in-out p-8 cursor-pointer hover:bg-sky-300 font-mono font-medium hover:font-bold bg-lime-300 shadow-lg rounded-md flex items-center justify-between">
+          <div v-for="task in getTasks" :key="task.id" :class="{'bg-amber-400': !task.completed}" class="transition duration-700 ease-in-out p-8 cursor-pointer hover:bg-sky-300 font-mono font-medium hover:font-bold bg-lime-300 shadow-lg rounded-md flex items-center justify-between">
             <div>
               <div>{{task.title}}</div>
               <div class="text-orange-800">{{task.description}}</div>
