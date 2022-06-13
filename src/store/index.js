@@ -17,7 +17,6 @@ export default createStore({
     },
  
     deleteTask(state,payload){
-      console. log('here')
       state.tasks = state.tasks.filter(task => task.id != payload.id)
     },
     updateTask(state,payload){
