@@ -2,13 +2,11 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 
 export default createStore({
+  
   state: {
-    tasks: [
-    
-    
-    ],/*set to empty array now since new tasks created are saved to local storage*/
-    
+    tasks: [],/*set to empty array now since new tasks created are saved to local storage*/
   },
+
   mutations: {
     setTasks: (state, tasks) => (state.tasks = tasks),
 
@@ -17,14 +15,6 @@ export default createStore({
     COMPLETE_TASK(state, task){
       task.completed = !task.completed
     },
-
-
-
-    // initialiseVars(state) {
-      // if (localStorage.getItem('tasks')) {
-          // state.tasks = JSON.parse(localStorage.tasks)
-      // }
-  // },
  
     deleteTask(state,payload){
       console. log('here')
@@ -45,6 +35,10 @@ export default createStore({
       context.commit('addTask', task)
     },
 
+    deleteTask({commit},task){
+      commit('deleteTask',task)
+    },
+
     // async fetchTasks({ commit }) {
     //   const response = await axios.get('https://tychak.github.io/')
     //   commit('setTasks', response.data)
@@ -61,9 +55,8 @@ export default createStore({
     
   },
   getters:{
-    // getTasks: state=>state.tasks,
     getTasks: state  => state.tasks,
-   incompleteTasks: state => state.tasks.filter((element) => {  
+    incompleteTasks: state => state.tasks.filter((element) => {  
     return !element.completed;
    })
   },

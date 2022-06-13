@@ -15,7 +15,7 @@
           
 
                <div class="space-x-2">
-              <button @click="deleteTask(index)" class="px-2 font-bold text-red-600 text-2xl" title="Delete task">x
+              <button @click="deleteTask(task)" class="px-2 font-bold text-red-600 text-2xl" title="Delete task">x
 </button>
               <button v-if="!task.completed" @click="markComplete(task.id)" class="px-2 font-bold text-green-600 text-xl" title="Mark completed">&check;</button>
               <button v-else @click="markIncomplete(index)" class="px-2 font-bold text-green-600 text-xl" title="Mark incomplete"><i class="fa fa-undo"></i></button>
@@ -118,12 +118,12 @@ const STORAGE_KEY = 'tasks';
         alert('Task Incomplete')
       },
 
-      deleteTask(index) {
+      deleteTask(task) {
         if(!confirm('Are you sure..?')) {
           return
         }
 
-        this.tasks.splice(index, 1)
+        this.$store.dispatch("deleteTask", task);
 
         alert('Task Deleted Successfully..!!')
       }
